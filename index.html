@@ -3,33 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#1a1a1a"/>    
-    <link href='https://i.ibb.co/b52pjVWp/IMG-20260403-210738-880.webp' rel='icon' type='image/x-icon'/>    
-    <link href='https://i.ibb.co/b52pjVWp/IMG-20260403-210738-880.webp' rel='shortcut icon' type='image/x-icon'/>    
-   
+    <meta name="theme-color" content="#000000"/>
+    
+    <link href='https://i.ibb.co/b52pjVWp/IMG-20260403-210738-880.webp' rel='icon' type='image/x-icon'/>
+    <link href='https://i.ibb.co/b52pjVWp/IMG-20260403-210738-880.webp' rel='shortcut icon' type='image/x-icon'/>
+       
     <title>Gauranga</title>
     <style>
-        img {
-  filter: grayscale(100%);
-/* Disable selection and save menus */
-            -webkit-touch-callout: none; /* Disables iOS Safari long-press menu */
-            -webkit-user-select: none;   /* Safari */
-            -khtml-user-select: none;     /* Konqueror HTML */
-            -moz-user-select: none;        /* Firefox */
-            -ms-user-select: none;         /* Internet Explorer/Edge */
-            user-select: none;             /* Chrome, Opera, and Edge */
-            pointer-events: none;      
+        img {  
+            filter: grayscale(100%);
+            -webkit-touch-callout: none; 
+            -webkit-user-select: none;   
+            -khtml-user-select: none;     
+            -moz-user-select: none;        
+            -ms-user-select: none;         
+            user-select: none;             
+            pointer-events: none;              
         }
-        
-        
-        * {       -webkit-tap-highlight-color: transparent;/* Makes the image un-clickable/un-draggable */
-      
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
+                    
+        * {       
+            -webkit-tap-highlight-color: transparent;
+            margin: 0;             
+            padding: 0;             
+            box-sizing: border-box;         
         }
-        
-        body {
+            
+        body {border-top:0.1px solid #000000;
             background-color: #121212;
             color: #ffffff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -41,11 +40,11 @@
         .blog-header {
             text-align: center;
             max-width: 800px;
-            margin: 14px auto 50px auto;
+            margin: 14px auto 30px auto;
         }
 
         .blog-header h1 {
-            font-size: 2.5rem;
+            font-size: 2em;
             font-weight: 700;
             letter-spacing: -0.5px;
             margin-bottom: 10px;
@@ -54,12 +53,100 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .blog-header p {
+        .blog-header p {font-weight: 300;
             color: #a0a0a0;
             font-size: 1rem;
         }
 
-        /* Container & Grid Styling */
+        /* Search Bar Container */
+        .search-container {
+            max-width: 400px;
+            margin: 0 auto 40px auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .search-row {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+
+        /* Badlaav: Custom Black Box Container standard Input ko chhupane ke liye */
+        .date-picker-wrapper {
+            position: relative;
+            flex-grow: 1;
+            background-color: #1e1e1e;
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: border-color 0.2s, background-color 0.2s;
+        }
+
+        .date-picker-wrapper:hover {
+            border-color: #444;
+            background-color: #252525;
+        }
+
+        /* Custom Text inside Black Box */
+        .date-placeholder {
+            font-size: 14px;
+            color: #eeeeee;
+            font-weight: 500;
+            pointer-events: none; /* Click event input par pass karne ke liye */
+            z-index: 1;
+        }
+
+        /* Invisible Date Input jo pure box ko cover karega */
+        .date-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0; /* Isse default input aur arrow gayab ho jayenge */
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        /* Default Calendar Arrow aur Icon ko remove karne ke liye */
+        .date-input::-webkit-calendar-picker-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .clear-btn {
+            padding: 0 20px;
+            height: 45px;
+            background: #222222;
+            border: 1px solid #2a2a2a;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .clear-btn:hover {
+            background: #ff7b00;
+            border-color: #ff7b00;
+        }
+
+        /* Container & Masonry Columns Layout */
         .gallery-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -67,9 +154,8 @@
         }
 
         .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
+            columns: 3 300px;
+            column-gap: 20px;
             width: 100%;
         }
 
@@ -80,8 +166,9 @@
             overflow: hidden;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
+            display: inline-block; 
+            width: 100%;
+            margin-bottom: 20px; 
             border: 1px solid #2a2a2a;
         }
 
@@ -94,34 +181,33 @@
         /* Image Wrapper */
         .card-image-box {
             width: 100%;
-            height: 240px;
             overflow: hidden;
             background-color: #000;
-            cursor: pointer; /* Changed to pointer to show it's clickable */
+            cursor: pointer; 
         }
 
         .card-image-box img {
             width: 100%;
-            height: 100%;
-            object-fit: cover; 
+            height: auto;
+            display: block;
+            object-fit: contain; 
             transition: transform 0.5s ease;
         }
 
         .blog-card:hover .card-image-box img {
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
         /* Text/Content Details Area */
         .card-content {
-            padding: 20px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             gap: 8px;
-            flex-grow: 1;
         }
 
         .card-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             line-height: 1.4;
             color: #f3f4f6;
@@ -129,9 +215,8 @@
         }
 
         .card-date {
-            font-size: 13px;
+            font-size: 12px;
             color: #888888;
-            margin-top: auto; 
             display: flex;
             align-items: center;
             gap: 6px;
@@ -176,12 +261,13 @@
         }
 
         .lightbox-close {
+Background:#222222; border-radius:50%; padding:1px 12px;
             position: absolute;
-            top: 20px;
+            top: 30px;
             right: 30px;
             color: #fff;
             font-size: 40px;
-            font-weight: bold;
+            font-weight:100;
             cursor: pointer;
             user-select: none;
             transition: color 0.2s;
@@ -197,25 +283,38 @@
                 padding: 20px 15px;
             }
             .blog-header h1 {
-                font-size: 2rem;
+                font-size: clamp(10vw, 4vw, 2.5rem);
             }
             .blog-grid {
-                gap: 20px;
+                columns: 1; 
+                gap: 15px;
             }
             .lightbox-close {
-                top: 15px;
+                top: 25px;
                 right: 20px;
                 font-size: 35px;
             }
         }
+
+#c{font-family: "cursive";}
     </style>
 </head>
 <body>
 
     <header class="blog-header">
-        <h1>Gauranga Photography</h1>
+        <h1> <span id='c'>Gauranga Photography.</span></h1>
         <p>A visual journal of captured moments.</p>
     </header>
+
+    <section class="search-container">
+        <div class="search-row">
+            <div class="date-picker-wrapper">
+                <span class="date-placeholder" id="datePlaceholder">Select Date</span>
+                <input type="date" id="dateSearch" class="date-input">
+            </div>
+            <button id="clearSearch" class="clear-btn">Reset</button>
+        </div>
+    </section>
 
     <main class="gallery-container">
         <div class="loading" id="loadingText">Waiting..</div>
@@ -223,7 +322,7 @@
     </main>
 
     <div id="lightbox" class="lightbox-modal">
-        <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <span class="lightbox-close" id="lightboxClose">×</span>
         <img class="lightbox-content" id="lightboxImg" src="" alt="Fullscreen View">
     </div>
 
@@ -233,11 +332,15 @@
 
         const blogGrid = document.getElementById('blogGrid');
         const loadingText = document.getElementById('loadingText');
+        const dateSearch = document.getElementById('dateSearch');
+        const datePlaceholder = document.getElementById('datePlaceholder');
+        const clearSearch = document.getElementById('clearSearch');
         
-        // Lightbox Elements
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightboxImg');
         const lightboxClose = document.getElementById('lightboxClose');
+
+        let allImagesData = [];
 
         function formatDate(isoString) {
             if (!isoString) return '';
@@ -249,56 +352,73 @@
             });
         }
 
+        // Format for showing inside the selected black box button (e.g., "June 17, 2026")
+        function formatSelectedDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        function displayImages(files) {
+            blogGrid.innerHTML = ''; 
+            
+            if (files.length === 0) {
+                loadingText.style.display = 'block';
+                loadingText.innerText = "Is date par koi image nahi mili!";
+                return;
+            }
+            
+            loadingText.style.display = 'none';
+
+            files.forEach((file) => {
+                const imageUrl = `https://lh3.googleusercontent.com/d/${file.id}=w1000`;
+                const cleanDate = formatDate(file.createdTime);
+                const cleanTitle = file.name.replace(/\.[^/.]+$/, "");
+
+                const cardDiv = document.createElement('article');
+                cardDiv.classList.add('blog-card');
+                                
+                cardDiv.innerHTML = `
+                    <div class="card-image-box">
+                        <img src="${imageUrl}" alt="${file.name}" loading="lazy" onerror="this.src='https://placehold.co/600x400/1e1e1e/a0a0a0?text=Image+Access+Error'">
+                    </div>
+                    <div class="card-content">
+                        <h2 class="card-title">${cleanTitle}</h2>
+                        <div class="card-date">
+                            <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">  <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z"/>  <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/></svg></span> Published: ${cleanDate}
+                        </div>
+                    </div>
+                `;
+
+                const imageBox = cardDiv.querySelector('.card-image-box');
+                imageBox.addEventListener('click', () => {
+                    const targetImg = imageBox.querySelector('img');
+                    if(!targetImg.src.includes('placehold.co')) {
+                        openLightbox(targetImg.src);
+                    }
+                });
+
+                blogGrid.appendChild(cardDiv);
+            });
+        }
+
         async function fetchDriveImages() {
             const url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+mimeType+contains+'image/'&fields=files(id,name,createdTime)&key=${API_KEY}`;
-            
+                
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                
+                        
                 if (data.error) {
                     throw new Error(data.error.message);
                 }
 
                 if (data.files && data.files.length > 0) {
-                    loadingText.style.display = 'none';
-                    
-                    data.files.forEach((file) => {
-                        // Using your link setup. (Note: standard high-res drive url is usually 'https://lh3.googleusercontent.com/d/{id}=w1600' if profile snippet fails)
-                        const imageUrl = `https://lh3.googleusercontent.com/d/${file.id}=w1000`;
-                        const cleanDate = formatDate(file.createdTime);
-                        const cleanTitle = file.name.replace(/\.[^/.]+$/, "");
-
-                        const cardDiv = document.createElement('article');
-                        cardDiv.classList.add('blog-card');
-                        
-                        cardDiv.innerHTML = `
-                            <div class="card-image-box">
-                                <img src="${imageUrl}" alt="${file.name}" loading="lazy" onerror="this.src='https://placehold.co/600x400/1e1e1e/a0a0a0?text=Image+Access+Error'">
-                            </div>
-                            <div class="card-content">
-                                <h2 class="card-title">${cleanTitle}</h2>
-                                <div class="card-date">
-                                    <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
-  <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z"/>
-  <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
-</svg></span> Published: ${cleanDate}
-                                </div>
-                            </div>
-                        `;
-
-                        // Lightbox click event added directly to the image container
-                        const imageBox = cardDiv.querySelector('.card-image-box');
-                        imageBox.addEventListener('click', () => {
-                            const targetImg = imageBox.querySelector('img');
-                            // Fallback to avoid trying to open the placeholder image if it errored out
-                            if(!targetImg.src.includes('placehold.co')) {
-                                openLightbox(targetImg.src);
-                            }
-                        });
-
-                        blogGrid.appendChild(cardDiv);
-                    });
+                    allImagesData = data.files; 
+                    displayImages(allImagesData);
                 } else {
                     loadingText.innerText = "Folder mein koi images nahi mili!";
                 }
@@ -308,29 +428,58 @@
             }
         }
 
-        // Functions to control Lightbox
+        // Date selection event listener
+        dateSearch.addEventListener('input', (e) => {
+            const selectedDate = e.target.value; 
+            if (!selectedDate) {
+                datePlaceholder.innerText = "Select Date";
+                displayImages(allImagesData);
+                return;
+            }
+
+            // Badlaav: Black box ke text ko select ki gayi date se replace karein
+            datePlaceholder.innerText = formatSelectedDate(selectedDate);
+
+            const filteredFiles = allImagesData.filter(file => {
+                const fileDateObj = new Date(file.createdTime);
+                const year = fileDateObj.getFullYear();
+                const month = String(fileDateObj.getMonth() + 1).padStart(2, '0');
+                const day = String(fileDateObj.getDate()).padStart(2, '0');
+                const fileFormattedDate = `${year}-${month}-${day}`;
+
+                return fileFormattedDate === selectedDate;
+            });
+
+            displayImages(filteredFiles);
+        });
+
+        // Reset button event
+        clearSearch.addEventListener('click', () => {
+            dateSearch.value = '';
+            datePlaceholder.innerText = "Select Date"; // Text reset
+            displayImages(allImagesData);
+        });
+
+        // Lightbox controls
         function openLightbox(src) {
             lightboxImg.src = src;
             lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevents scrolling behind the image
+            document.body.style.overflow = 'hidden'; 
         }
 
         function closeLightbox() {
             lightbox.classList.remove('active');
-            document.body.style.overflow = ''; // Restores scrolling
-            setTimeout(() => { lightboxImg.src = ''; }, 300); // Clear source after transition completes
+            document.body.style.overflow = ''; 
+            setTimeout(() => { lightboxImg.src = ''; }, 300); 
         }
 
-        // Close events
         lightboxClose.addEventListener('click', closeLightbox);
         lightbox.addEventListener('click', (e) => {
-            // Closes only if you click the dark background, not the image itself
             if (e.target === lightbox) {
                 closeLightbox();
             }
         });
 
-        // Close on 'Escape' key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && lightbox.classList.contains('active')) {
                 closeLightbox();
